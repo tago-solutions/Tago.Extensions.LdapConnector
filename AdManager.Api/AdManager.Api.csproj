@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tago.Extensions.LdapConnector" Version="2.0.0-preview-01" />
+    <PackageReference Include="Tago.Extensions.LdapConnector" Version="2.0.0-preview-03" />
   </ItemGroup>
 
   

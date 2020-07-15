@@ -27,8 +27,6 @@ namespace AdManager.Api.BL
 
     public class AdUserService
     {
-
-
         private readonly AdUserManager userManager;
 
         public AdUserService(AdUserManager userManager)

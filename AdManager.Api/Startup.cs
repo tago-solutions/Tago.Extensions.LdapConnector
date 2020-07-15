@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Tago.Ldap.AdUtils;
 
 namespace AdManager.Api
@@ -26,18 +27,28 @@ namespace AdManager.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var ctx = new AdContext
-            {
-                ad_root = "dc=tago,dc=com",
-                port = 636,
-                serverIp = "192.168.59.128",              
-                userName = @"userName",
-                password = "************",
-                domain = "tago.com",
-            };
-            AdUserManager userManager = new AdUserManager(ctx);
+            //var ctx = new AdContext
+            //{
+            //    AdRootDn = "dc=tago,dc=com",
+            //    Port = 636,
+            //    ServerIp = "192.168.59.128",              
+            //    UserName = @"userName",
+            //    Password = "************",
+            //    Domain = "tago.com",
+            //};
+
+            services.Configure<AdContext>(o=> {
+                o.AdRootDn = "dc=tago,dc=com";
+                o.Port = 636;
+                o.ServerIp = "192.168.59.128";
+                o.UserName = @"userName";
+                o.Password = "************";
+                o.Domain = "tago.com";
+            });
+            //AdUserManager userManager = new AdUserManager(ctx);
+            services.AddSingleton<AdUserManager>();
             services.AddSingleton<AdUserService>();
-            services.AddSingleton(userManager);
+            //services.AddSingleton(userManager);
 
             services.AddControllers();
         }
